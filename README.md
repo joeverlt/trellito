@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Trellito
 
-## Getting Started
+Trellito is an application inspired by Trello that allows you to organize your tasks and projects efficiently and collaboratively. With an intuitive and user-friendly interface, Trellito helps you maintain control and visibility of your projects, allowing you to manage your tasks effectively.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Installation](#installation)
+- [Usage](#usage)
+- [Features](#features)
+- [Contribution](#contribution)
+- [License](#license)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository: `git clone https://github.com/your-username/trellito.git`
+2. Navigate to the project directory: `cd trellito`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Docker Compose
 
-## Learn More
+3. Create the environment variables file: `.env` and configure the variables as needed.
+4. Run Docker Compose to build and launch the containers: `docker-compose up --build`
 
-To learn more about Next.js, take a look at the following resources:
+### Usage without Docker
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Install the dependencies: `npm install`
+4. Start the development server: `npm run dev`
+5. Open your browser and visit: `http://localhost:3000`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- Creation and management of custom boards.
+- Organization of tasks into lists and cards.
+- Detailed descriptions and comments on each card.
+- Labels and due dates to categorize and prioritize tasks.
+- Drag-and-drop functionality for easy reordering.
+- Assignment of cards to team members.
+- Reminders and notifications for effective tracking.
+- Real-time collaboration with other users.
+- Customization of board colors and backgrounds.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Contribution
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Contributions are welcome! If you find any bugs or have any improvement ideas, please create an issue or submit a pull request.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
