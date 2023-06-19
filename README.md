@@ -5,6 +5,7 @@ Trellito is an application inspired by Trello that allows you to organize your t
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
 - [Features](#features)
 - [Contribution](#contribution)
 - [License](#license)
@@ -38,7 +39,7 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
      - Navigate to the backend directory: `cd trellito-server`
      - Run `npm install` or `yarn install`
 
-### Usage
+## Usage
 
 5. Start servers:
 
@@ -53,7 +54,7 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
 
 **Note:** Before starting the application, ensure that MongoDB is running and accessible on your machine.
 
-**Demo:** You can access a live demo of the application [here](https://example.com), but please note that the demo requires Google authentication.
+**Demo:** You can access a live demo of the application [here](https://trellito-pdfgp81zz-joeverlt.vercel.app/), but please note that the demo requires Google authentication.
 
 ## Features
 
