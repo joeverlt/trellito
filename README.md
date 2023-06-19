@@ -20,11 +20,16 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
 
 ### Docker Compose
 
-3. Run Docker Compose to build and launch the containers: `docker-compose up --build`
+3. Run Docker Compose to build and launch the containers: `docker-compose up -D`
 
 ### Without Docker
 
-3. Install the dependencies:
+3. Install and configure MongoDB:
+
+   - Make sure you have MongoDB installed and configured on your local machine.
+   - If not, follow the MongoDB installation instructions for your operating system.
+
+4. Install the dependencies:
 
    - Frontend:
      - Navigate to the frontend directory: `cd trellito-client`
@@ -33,7 +38,9 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
      - Navigate to the backend directory: `cd trellito-server`
      - Run `npm install` or `yarn install`
 
-4. Start servers:
+### Usage
+
+5. Start servers:
 
    - Backend:
      - Navigate to the backend directory: `cd trellito-server`
@@ -42,7 +49,11 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
      - Navigate to the frontend directory: `cd trellito-client`
      - Run `npm run dev` or `yarn dev`
 
-5. Open your browser and visit: `http://localhost:3000`
+6. Open your browser and visit: `http://localhost:3000`
+
+**Note:** Before starting the application, ensure that MongoDB is running and accessible on your machine.
+
+**Demo:** You can access a live demo of the application [here](https://example.com), but please note that the demo requires Google authentication.
 
 ## Features
 
