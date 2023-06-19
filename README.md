@@ -48,9 +48,9 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
 
 - Creation and management of custom boards.
 - Organization of tasks into lists and cards.
+- Drag-and-drop functionality for easy reordering.
 - Detailed descriptions and comments on each card. (coming soon) ⌛
 - Labels and due dates to categorize and prioritize tasks. (coming soon) ⌛
-- Drag-and-drop functionality for easy reordering.
 - Assignment of cards to team members. (coming soon) ⌛
 - Reminders and notifications for effective tracking. (coming soon) ⌛
 - Real-time collaboration with other users. (coming soon) ⌛

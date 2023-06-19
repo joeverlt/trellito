@@ -12,6 +12,8 @@ interface SignInFormData {
   password: string
 }
 
+const isDevelopmentMode = process.env.ENVIRONMENT === 'development'
+
 export const SignInForm: React.FC = () => {
   const searchParams = useSearchParams()
   const callbackUrl: string = searchParams.get('callbackUrl') as string
@@ -29,23 +31,27 @@ export const SignInForm: React.FC = () => {
   return (
     <SignInWrapper>
       <Title>Sign in</Title>
-      <SignInFormContainer onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="email"
-          placeholder="email"
-          form={form}
-          rules={{ required: true }}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="password"
-          form={form}
-          rules={{ required: true }}
-        />
-        <Button type="submit" label="Sign In" block />
-      </SignInFormContainer>
-      <span>- or -</span>
+      {isDevelopmentMode && (
+        <>
+          <SignInFormContainer onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              name="email"
+              placeholder="email"
+              form={form}
+              rules={{ required: true }}
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="password"
+              form={form}
+              rules={{ required: true }}
+            />
+            <Button type="submit" label="Sign In" block />
+          </SignInFormContainer>
+          <span>- or -</span>
+        </>
+      )}
       <GoogleButton />
       {error && (
         <Toast

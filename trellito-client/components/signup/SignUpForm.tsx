@@ -11,6 +11,8 @@ interface SignUpFormData {
   password: string
 }
 
+const isDevelopmentMode = process.env.ENVIRONMENT === 'development'
+
 export const SignUpForm: React.FC = () => {
   const form: UseFormReturn<SignUpFormData> = useForm()
   const { handleSubmit } = form
@@ -25,29 +27,33 @@ export const SignUpForm: React.FC = () => {
   return (
     <SignUpWrapper>
       <Title>Sign up</Title>
-      <SignUpFormContainer onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          name="name"
-          placeholder="name"
-          form={form}
-          rules={{ required: true }}
-        />
-        <Input
-          name="email"
-          placeholder="email"
-          form={form}
-          rules={{ required: true }}
-        />
-        <Input
-          name="password"
-          type="password"
-          placeholder="password"
-          form={form}
-          rules={{ required: true }}
-        />
-        <Button type="submit" label="Sign In" block />
-      </SignUpFormContainer>
-      <span>- or -</span>
+      {isDevelopmentMode && (
+        <>
+          <SignUpFormContainer onSubmit={handleSubmit(onSubmit)}>
+            <Input
+              name="name"
+              placeholder="name"
+              form={form}
+              rules={{ required: true }}
+            />
+            <Input
+              name="email"
+              placeholder="email"
+              form={form}
+              rules={{ required: true }}
+            />
+            <Input
+              name="password"
+              type="password"
+              placeholder="password"
+              form={form}
+              rules={{ required: true }}
+            />
+            <Button type="submit" label="Sign In" block />
+          </SignUpFormContainer>
+          <span>- or -</span>
+        </>
+      )}
       <GoogleButton />
     </SignUpWrapper>
   )
