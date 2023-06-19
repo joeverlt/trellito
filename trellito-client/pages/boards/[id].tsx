@@ -19,7 +19,7 @@ const BoardPage: React.FC = () => {
     <Page title={`Board: ${board?.title}`}>
       <Container>
         <Back />
-        <Title title={board?.title as string} />
+        <Title title={board?.title as string} marginTop="8px" />
         <Board id={id as string} />
       </Container>
     </Page>

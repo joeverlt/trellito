@@ -15,7 +15,7 @@ export default function App({
     <Provider store={store}>
       <SessionProvider session={session}>
         <PersistGate persistor={persistor}>
-          <Component {...pageProps} />
+          {() => <Component {...pageProps} />}
         </PersistGate>
       </SessionProvider>
     </Provider>

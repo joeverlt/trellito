@@ -9,11 +9,7 @@ export const Paragraph: React.FC<IParagraph> = ({ children }) => {
 
 const ParagraphWrapper = styled.p`
   width: 100%;
-  max-width: 992px;
   margin: 10px auto;
-  margin-bottom: 36px;
-
-  @media (max-width: 992px) {
-    margin: 0 24px 32px 24px;
-  }
+  max-width: 992px;
+  padding: 0px 24px;
 `

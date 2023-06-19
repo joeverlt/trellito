@@ -42,6 +42,7 @@ const BoardsContainer = styled.div`
   max-width: 992px;
   margin: 0 auto;
   height: 100%;
+  padding: 0 24px;
 
   @media (max-width: 992px) {
     flex-direction: column;

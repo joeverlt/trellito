@@ -31,27 +31,23 @@ export const SignInForm: React.FC = () => {
   return (
     <SignInWrapper>
       <Title>Sign in</Title>
-      {isDevelopmentMode && (
-        <>
-          <SignInFormContainer onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              name="email"
-              placeholder="email"
-              form={form}
-              rules={{ required: true }}
-            />
-            <Input
-              name="password"
-              type="password"
-              placeholder="password"
-              form={form}
-              rules={{ required: true }}
-            />
-            <Button type="submit" label="Sign In" block />
-          </SignInFormContainer>
-          <span>- or -</span>
-        </>
-      )}
+      <SignInFormContainer onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          name="email"
+          placeholder="email"
+          form={form}
+          rules={{ required: true }}
+        />
+        <Input
+          name="password"
+          type="password"
+          placeholder="password"
+          form={form}
+          rules={{ required: true }}
+        />
+        <Button type="submit" label="Sign In" block />
+      </SignInFormContainer>
+      <span>- or -</span>
       <GoogleButton />
       {error && (
         <Toast

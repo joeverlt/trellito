@@ -7,7 +7,7 @@ const BoardsPage: React.FC = () => {
   return (
     <Page title="Boards">
       <Container>
-        <Title title="Boards" />
+        <Title title="Boards" marginTop="48px" />
         <Boards />
       </Container>
     </Page>

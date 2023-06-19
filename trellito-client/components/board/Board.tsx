@@ -126,14 +126,11 @@ const BoardContainer = styled.div`
 
 const Lists = styled.div`
   display: flex;
+  min-width: 992px;
   align-items: flex-start;
   justify-content: flex-start;
   gap: 12px;
-  padding: 0 200px;
-  padding-bottom: 20px;
-
-  @media (max-width: 992px) {
-    padding: 0 20px;
-    padding-bottom: 20px;
-  }
+  padding: 0 24px;
+  padding-bottom: 24px;
+  margin: 0 auto;
 `

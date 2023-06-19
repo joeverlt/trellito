@@ -25,10 +25,11 @@ const BackButtonWrapper = styled.button`
   width: 100%;
   max-width: 992px;
   margin: 0 auto;
-  margin-bottom: 24px;
+  margin-top: 48px;
+  padding: 0px 24px;
 
   @media (max-width: 992px) {
-    margin: 0 24px 18px 24px;
+    margin-top: 0px;
   }
 `
 
