@@ -90,12 +90,14 @@ export const Board: React.FC<IBoard> = ({ id }) => {
             {(provided) => (
               <Lists ref={provided.innerRef} {...provided.droppableProps}>
                 {lists.map((list, index) => (
-                  <List
-                    id={list.id as string}
-                    key={list.id}
-                    index={index}
-                    title={list.title as string}
-                  />
+                  <div style={{ maxWidth: '304px' }}>
+                    <List
+                      id={list.id as string}
+                      key={list.id}
+                      index={index}
+                      title={list.title as string}
+                    />
+                  </div>
                 ))}
                 {provided.placeholder}
                 <div style={{ minWidth: '304px' }}>

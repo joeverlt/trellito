@@ -49,7 +49,6 @@ export const authOptions: NextAuthOptions = {
           headers: { 'Content-Type': 'application/json' }
         })
         const data = await res.json()
-        res.headers.set('Authorization bearer', data.user.token)
         if (res.ok && data) return { ...data.user }
         return null
       }
