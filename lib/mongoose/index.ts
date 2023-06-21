@@ -6,7 +6,8 @@ const DBdatabase = process.env.DATABASE_NAME
 const DBhost = process.env.DATABASE_HOST
 const DBport = process.env.DATABASE_PORT
 
-const url = `mongodb://${DBuser}:${DBpassword}@${DBhost}:${DBport}/${DBdatabase}?authSource=admin&directConnection=true&ssl=false`
+// const url = `mongodb://${DBuser}:${DBpassword}@${DBhost}:${DBport}/${DBdatabase}?authSource=admin&directConnection=true&ssl=false`
+const url = `mongodb+srv://${DBuser}:${DBpassword}@${DBhost}/${DBdatabase}?retryWrites=true&w=majority`
 
 export const connection = async () => {
   try {
