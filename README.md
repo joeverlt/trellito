@@ -15,9 +15,9 @@ Trellito is an application inspired by Trello that allows you to organize your t
 1. Clone the repository: `git clone https://github.com/joeverlt/trellito.git`
 2. Navigate to the project directory: `cd trellito`
 
-**Note:** Make sure to create an `.env.local` file in the root directory of the frontend (`trellito-client`) and an `.env` file in the root directory of the backend (`trellito-server`). You can find template files (`env.local.template` and `.env.sample`) with the required variables that need to be filled with the appropriate values.
+**Note:** Make sure to create an `.env.local` file in the root directory. You can find template file (`env.local.template`) with the required variables that need to be filled with the appropriate values.
 
-Remember to save the `.env.local` and `.env` files once you have completed configuring the environment variables. Providing the correct values for each variable is important for the proper functioning of the application.
+Remember to save the `.env.local` file once you have completed configuring the environment variables. Providing the correct values for each variable is important for the proper functioning of the application.
 
 ### Docker Compose
 
@@ -32,29 +32,16 @@ Remember to save the `.env.local` and `.env` files once you have completed confi
 
 4. Install the dependencies:
 
-   - Frontend:
-     - Navigate to the frontend directory: `cd trellito-client`
-     - Run `npm install` or `yarn install`
-   - Backend:
-     - Navigate to the backend directory: `cd trellito-server`
-     - Run `npm install` or `yarn install`
+   - Run `npm install` or `yarn install`
 
 ## Usage
 
-5. Start servers:
-
-   - Backend:
-     - Navigate to the backend directory: `cd trellito-server`
-     - Run `npm run serve` or `yarn serve`
-   - Frontend:
-     - Navigate to the frontend directory: `cd trellito-client`
-     - Run `npm run dev` or `yarn dev`
-
-6. Open your browser and visit: `http://localhost:3000`
+   - Run `npm run dev` or `yarn dev`
+   - Open your browser and visit: `http://localhost:3000`
 
 **Note:** Before starting the application, ensure that MongoDB is running and accessible on your machine.
 
-**Demo:** You can access a live demo of the application [here](https://trellito-pdfgp81zz-joeverlt.vercel.app/), but please note that the demo requires Google authentication.
+**Demo:** You can access a live demo of the application [[here]](https://trellito-pdfgp81zz-joeverlt.vercel.app/)
 
 ## Features
 

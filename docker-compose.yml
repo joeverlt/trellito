@@ -1,44 +1,18 @@
 version: '3.3'
 services:
-  trellito-client:
-    env_file: ./trellito-client/.env.local
-    image: 'trellito-client'
+  trellito:
+    env_file: .env.local
+    image: 'trellito'
     restart: 'always'
     build:
-      context: ./trellito-client
-    depends_on:
-      - trellito-server
+      context: ./
     volumes:
-      - ./trellito-client:/usr/src
+      - ./trellito:/usr/src
       - /usr/src/node_modules
     ports:
       - 3000:3000
-    container_name: 'trellito-client'
-    environment:
-      - API_URL=http://trellito-server:8080/api/v1
+    container_name: 'trellito'
     working_dir: '/usr/src'
-    stdin_open: true
-    tty: true
-    networks:
-      - local
-
-  trellito-server:
-    env_file: ./trellito-server/.env
-    image: 'trellito-server'
-    restart: 'always'
-    build:
-      context: ./trellito-server
-    volumes:
-      - ./trellito-server:/usr/src
-      - /usr/src/node_modules
-    ports:
-      - 8080:8080
-    container_name: 'trellito-server'
-    working_dir: '/usr/src'
-    environment:
-      - DATABASE_HOST=mongo
-    depends_on:
-      - mongo
     stdin_open: true
     tty: true
     networks:
@@ -49,7 +23,6 @@ services:
     restart: always
     volumes:
       - mongo_data:/var/lib/mongo
-    env_file: ./trellito-server/.env
     ports:
       - 27017:27017
     environment:
