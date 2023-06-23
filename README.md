@@ -5,7 +5,6 @@ Trellito is an application inspired by Trello that allows you to organize your t
 ## Table of Contents
 
 - [Installation](#installation)
-- [Usage](#usage)
 - [Features](#features)
 - [Contribution](#contribution)
 - [License](#license)
@@ -34,14 +33,15 @@ Remember to save the `.env.local` file once you have completed configuring the e
 
    - Run `npm install` or `yarn install`
 
-## Usage
+5. Run project in development or production mode:
 
-   - Run `npm run dev` or `yarn dev`
+   - Run `npm run dev` or `yarn dev` if you run the project in development mode
+   - Run `npm run serve` or `yarn serve` if you run the project in production mode
    - Open your browser and visit: `http://localhost:3000`
 
 **Note:** Before starting the application, ensure that MongoDB is running and accessible on your machine.
 
-**Demo:** You can access a live demo of the application [[here]](https://trellito-pdfgp81zz-joeverlt.vercel.app/)
+**Demo:** You can access a live demo of the application [[here]](https://trellito-ecru.vercel.app/)
 
 ## Features
 

@@ -1,32 +1,30 @@
 import { BoardCard } from './BoardCard'
 import { AddCard } from '../AddCard'
-import {
-  addBoard,
-  boardSelector as selector
-} from '@/store/reducers/boards.reducer'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import { AnyAction, Dispatch, createSelector } from '@reduxjs/toolkit'
 import styled from 'styled-components'
+import { useAddBoardMutation, useGetBoardsQuery } from '@/store/services'
 
-export const Boards: React.FC = () => {
-  const dispatch: Dispatch<AnyAction> = useAppDispatch()
-  const memoized = createSelector([selector], (data) => data)
-  const boards: Board[] = useAppSelector(memoized)
+interface BoardsProps {
+  boards: Board[]
+}
 
-  const onSave: Function = (data: Board) => dispatch(addBoard(data))
+export const Boards: React.FC<BoardsProps> = ({ boards }) => {
+  const [addBoard, { isLoading: isAdding }] = useAddBoardMutation()
+
+  const onAddBoard: Function = (data: Board) => addBoard(data)
 
   return (
     <BoardsContainer>
       <BoardCards>
-        {boards.map((board: Board) => (
-          <BoardCard
-            key={board.id}
-            title={board.title as string}
-            id={board.id as string}
-          />
+        {boards?.map((board: Board) => (
+          <BoardCard key={board.id} board={board} />
         ))}
         <AddWrapper>
-          <AddCard block title="Add board" onSave={onSave} />
+          <AddCard
+            block
+            title="Add board"
+            onAdd={onAddBoard}
+            loading={isAdding}
+          />
         </AddWrapper>
       </BoardCards>
     </BoardsContainer>

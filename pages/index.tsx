@@ -1,7 +1,7 @@
 import { Container } from '@/components/Container'
 import { Paragraph } from '@/components/Paragraph'
 import { Title } from '@/components/Title'
-import { Page } from '@/layouts/Page'
+import Page from '@/layouts/Page'
 
 const HomePage: React.FC = () => {
   return (

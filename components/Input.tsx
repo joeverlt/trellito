@@ -1,7 +1,7 @@
 import { RegisterOptions, UseFormReturn } from 'react-hook-form'
 import styled from 'styled-components'
 
-interface IInput {
+interface InputProps {
   name: string
   placeholder?: string
   type?: string
@@ -9,7 +9,7 @@ interface IInput {
   rules?: RegisterOptions
 }
 
-export const Input: React.FC<IInput> = ({
+export const Input: React.FC<InputProps> = ({
   name,
   placeholder,
   type,

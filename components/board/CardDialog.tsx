@@ -1,36 +1,35 @@
-import styled from 'styled-components'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
-import {
-  selectCard,
-  selectedCardSelector as selector,
-  updateCard
-} from '@/store/reducers/cards.reducer'
-import { Dialog } from '../Dialog'
-import { EditableParagraph } from '../EditableParagraph'
 import { AnyAction, Dispatch, createSelector } from '@reduxjs/toolkit'
+import { Dialog } from '../Dialog'
+import { selectedCardSelector as selector } from '@/store/reducers/card.reducer'
+import { EditableParagraph } from '../EditableParagraph'
 import { EditableTitle } from '../EditableTitle'
 import { MouseEventHandler } from 'react'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { selectCard } from '@/store/reducers/card.reducer'
+import styled from 'styled-components'
+import { useUpdateCardMutation } from '@/store/services'
 
 export const CardDialog: React.FC = () => {
   const dispatch: Dispatch<AnyAction> = useAppDispatch()
   const memoizedCard = createSelector([selector], (data) => data)
+  const [updateCard, { isLoading: isUpdating }] = useUpdateCardMutation()
   const data: Card | undefined = useAppSelector(memoizedCard)
 
   const onUpdateCard: Function = (description: string) =>
-    dispatch(updateCard({ id: data?.id, description }))
+    updateCard({ id: data?.id, description })
 
   const onUpdateTitle: Function = (title: string) =>
-    dispatch(updateCard({ id: data?.id, title }))
+    updateCard({ id: data?.id, title })
 
   const onClose: MouseEventHandler = () => dispatch(selectCard(undefined))
 
   return (
     <Dialog show={!!data} onClose={onClose}>
       <TitleWrapper>
-        <EditableTitle title={data?.title} onSave={onUpdateTitle} />
+        <EditableTitle title={data?.title} onEdit={onUpdateTitle} />
       </TitleWrapper>
       <small>list: {data?.list}</small>
-      <EditableParagraph paragraph={data?.description} onSave={onUpdateCard} />
+      <EditableParagraph paragraph={data?.description} onEdit={onUpdateCard} />
     </Dialog>
   )
 }

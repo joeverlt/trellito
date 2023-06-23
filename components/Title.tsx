@@ -1,11 +1,11 @@
 import styled from 'styled-components'
 
-interface ITitle {
+interface TitleProps {
   title: string
   top?: string
 }
 
-export const Title: React.FC<ITitle> = ({ title, top = '48px' }) => {
+export const Title: React.FC<TitleProps> = ({ title, top = '48px' }) => {
   return <TitleWrapper top={top}>{title}</TitleWrapper>
 }
 

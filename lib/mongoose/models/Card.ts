@@ -8,11 +8,14 @@ export interface CardDocument extends Document {
   list: ListDocument['_id']
 }
 
-const schema = new Schema<CardDocument>({
-  title: String,
-  position: Number,
-  description: String,
-  list: { type: Schema.Types.ObjectId, ref: 'List' }
-})
+const schema = new Schema<CardDocument>(
+  {
+    title: String,
+    description: String,
+    position: Number,
+    list: { type: Schema.Types.ObjectId, ref: 'List' }
+  },
+  { timestamps: true }
+)
 
 export const Card = models.Card || model<CardDocument>('Card', schema)

@@ -11,6 +11,7 @@ interface List {
   title?: string
   position?: number
   board?: string
+  cards: Card[]
 }
 
 interface Board {
@@ -18,4 +19,5 @@ interface Board {
   title?: string
   description?: string
   owner?: string
+  lists: List[]
 }

@@ -1,7 +1,7 @@
 import { MouseEventHandler } from 'react'
 import styled, { css } from 'styled-components'
 
-interface IButton {
+interface ButtonProps {
   label?: string
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl'
   block?: boolean
@@ -10,7 +10,7 @@ interface IButton {
   onClick?: MouseEventHandler
 }
 
-export const Button: React.FC<IButton> = ({
+export const Button: React.FC<ButtonProps> = ({
   size,
   label,
   severity,

@@ -1,9 +1,9 @@
 import { styled } from 'styled-components'
 
-interface IParagraph {
+interface ParagraphProps {
   children: React.ReactNode
 }
-export const Paragraph: React.FC<IParagraph> = ({ children }) => {
+export const Paragraph: React.FC<ParagraphProps> = ({ children }) => {
   return <ParagraphWrapper>{children}</ParagraphWrapper>
 }
 

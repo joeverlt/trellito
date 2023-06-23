@@ -2,40 +2,44 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { IconButton } from '../IconButton'
 import { FaTimesCircle } from 'react-icons/fa'
-import { useAppDispatch } from '@/store/hooks'
-import { deleteBoard, updateBoard } from '@/store/reducers/boards.reducer'
-import { AnyAction, Dispatch } from '@reduxjs/toolkit'
 import { MouseEventHandler } from 'react'
 import { EditableTitle } from '../EditableTitle'
+import {
+  useDeleteBoardMutation,
+  useUpdateBoardMutation
+} from '@/store/services'
+import { Loading } from '../Loading'
 
-interface IBoardCard {
-  id: string
-  title: string
+interface BoardCardProps {
+  board: Board
 }
 
-export const BoardCard: React.FC<IBoardCard> = ({ title, id }) => {
-  const dispatch: Dispatch<AnyAction> = useAppDispatch()
-  const onDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
+export const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
+  const [deleteBoard, { isLoading: isDeleting }] = useDeleteBoardMutation()
+  const [updateBoard, { isLoading: isUpdating }] = useUpdateBoardMutation()
+  const { title, id } = board
+
+  const onDeleteBoard: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation()
     event.nativeEvent.preventDefault()
-    dispatch(deleteBoard({ id }))
+    deleteBoard(id as string)
   }
 
-  const onSave: Function = (title: string) =>
-    dispatch(updateBoard({ id, title }))
+  const onUpdate: Function = (title: string) => updateBoard({ id, title })
 
   return (
     <Link href={`/boards/${id}`}>
       <Card>
         <Title>
-          <EditableTitle title={title} onSave={onSave} />
+          <EditableTitle title={title} onEdit={onUpdate} />
           <IconButton
             severity="muted"
             size={18}
             icon={FaTimesCircle}
-            onClick={onDelete}
+            onClick={onDeleteBoard}
           />
         </Title>
+        {(isDeleting || isUpdating) && <Loading />}
       </Card>
     </Link>
   )
@@ -51,6 +55,8 @@ const Card = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
 
   @media (max-width: 992px) {
     width: 320px;

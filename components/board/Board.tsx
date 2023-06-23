@@ -2,76 +2,90 @@ import styled from 'styled-components'
 import { List } from './List'
 import { AddCard } from '../AddCard'
 import {
-  addList,
-  listSelector as selector,
-  sortList
-} from '@/store/reducers/lists.reducer'
-import {
   DragDropContext,
   OnDragEndResponder,
   DropResult
 } from 'react-beautiful-dnd'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import { Droppable } from '../Droppable'
-import { moveCard, sortCard } from '@/store/reducers/cards.reducer'
-import { AnyAction, createSelector } from '@reduxjs/toolkit'
 import { CardDialog } from './CardDialog'
-import { Dispatch } from 'react'
+import {
+  useAddListMutation,
+  useMoveCardMutation,
+  useSortCardMutation,
+  useSortListMutation
+} from '@/store/services'
 
-interface IBoard {
-  id: string
+interface BoardProps {
+  board: Board
 }
 
-export const Board: React.FC<IBoard> = ({ id }) => {
-  const dispatch: Dispatch<AnyAction> = useAppDispatch()
-  const filter = (list: List) => list.board == id
-  const memoized = createSelector([selector], (data) => data.filter(filter))
-  const lists: List[] = useAppSelector(memoized)
+interface MoveCardData {
+  fromPosition: number
+  toPosition: number
+  cardId: string
+  fromListId: string
+  toListId: string
+}
 
-  const onSave: Function = (data: List) => {
+interface SortData {
+  from: number
+  to: number
+}
+
+interface SortCardData extends SortData {
+  listId: string
+}
+
+export const Board: React.FC<BoardProps> = ({ board }) => {
+  const [addList, { isLoading: isUpdating }] = useAddListMutation()
+  const [sortList] = useSortListMutation()
+  const [sortCard] = useSortCardMutation()
+  const [moveCard] = useMoveCardMutation()
+  const { id, lists } = board
+
+  const onAddList: Function = (data: List) => {
     data.board = id
-    dispatch(addList(data))
+    data.position = lists?.length
+    addList(data)
   }
 
-  const onSortList: Function = (data: { from: number; to: number }) =>
-    dispatch(sortList({ ...data, board: id }))
+  const onSortList: Function = (data: SortData) =>
+    sortList({ ...data, boardId: id as string })
 
-  const onSortCard: Function = (data: {
-    from: number
-    to: number
-    list: string
-  }) => dispatch(sortCard(data))
+  const onSortCard: Function = (data: SortCardData) =>
+    sortCard({ ...data, boardId: id as string })
 
-  const onMoveCard = (data: {
-    from: number
-    to: number
-    list: string
-    id: string
-  }) => dispatch(moveCard(data))
+  const onMoveCard = (data: MoveCardData) =>
+    moveCard({ ...data, boardId: id as string })
 
   const handleDragEnd: OnDragEndResponder = (result: DropResult) => {
     if (!result.destination) return
     const { source, destination } = result
     const [element, id] = result.draggableId.split('-')
-    const [_, code] = result.destination.droppableId.split('-')
+    const [_a, destinationId] = result.destination.droppableId.split('-')
+    const [_b, sourceId] = result.source.droppableId.split('-')
 
     switch (element) {
       case 'list':
-        onSortList({ from: source.index, to: destination.index })
+        onSortList({
+          from: source.index,
+          to: destination.index
+        })
         break
       case 'card':
-        if (source.droppableId === destination.droppableId)
+        if (source.droppableId === destination.droppableId) {
           onSortCard({
             from: source.index,
             to: destination.index,
-            list: code
+            listId: destinationId
           })
-        else {
+        } else {
           onMoveCard({
-            id,
-            from: source.index,
-            to: destination.index,
-            list: code
+            cardId: id,
+            fromPosition: source.index,
+            toPosition: destination.index,
+            fromListId: sourceId,
+            toListId: destinationId
           })
         }
         break
@@ -89,18 +103,19 @@ export const Board: React.FC<IBoard> = ({ id }) => {
           >
             {(provided) => (
               <Lists ref={provided.innerRef} {...provided.droppableProps}>
-                {lists.map((list, index) => (
-                  <div key={list.id} style={{ maxWidth: '304px' }}>
-                    <List
-                      id={list.id as string}
-                      index={index}
-                      title={list.title as string}
-                    />
-                  </div>
-                ))}
+                {lists &&
+                  lists.map((list) => (
+                    <div key={list.id} style={{ maxWidth: '304px' }}>
+                      <List list={list} />
+                    </div>
+                  ))}
                 {provided.placeholder}
                 <div style={{ minWidth: '304px' }}>
-                  <AddCard title="Add list" onSave={onSave} />
+                  <AddCard
+                    title="Add list"
+                    loading={isUpdating}
+                    onAdd={onAddList}
+                  />
                 </div>
               </Lists>
             )}
