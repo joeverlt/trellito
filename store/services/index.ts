@@ -5,7 +5,7 @@ import { CardEndpoints } from './endpoints/cards'
 
 type ServiceTagTypes = 'Boards' | 'Lists' | 'Cards' | 'Board'
 
-const apiUrl = process.env.API_URL
+const apiUrl = process.env.NEXT_PUBLIC_API_URL
 
 export const services = createApi({
   reducerPath: 'services',
