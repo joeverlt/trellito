@@ -30,8 +30,9 @@ export const authOptions: NextAuthOptions = {
           if (!user) throw new Error('User not found. code:1')
           const isMatch = await user.comparePassword(password)
           if (!isMatch) throw new Error('Invalid email or password. code:2')
-          const token: string = Tokenize.encode(user, '12h')
-          if (user) return { id: user._id, name: user.name, email, token }
+          const data = { id: user.id, name: user.name, email: user.email }
+          const token: string = Tokenize.encode(data, '24h')
+          if (user) return { id: user.id, name: user.name, email, token }
         }
         return null
       }
@@ -55,8 +56,9 @@ export const authOptions: NextAuthOptions = {
           user = new UserModel({ name, email, password })
           user.encryptPassword()
           await user.save()
-          const token: string = Tokenize.encode(user, '12h')
-          return { id: user._id, name, email, token }
+          const data = { id: user.id, name: user.name, email: user.email }
+          const token: string = Tokenize.encode(data, '24h')
+          return { id: user.id, name, email, token }
         }
         return null
       }

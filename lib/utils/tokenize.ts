@@ -8,8 +8,7 @@ export default class Tokenize {
   private static apiSecret: Secret = process.env.API_SECRET as Secret
 
   public static encode = (data: Keys, duration: string): string => {
-    const payload: string = JSON.stringify(data)
-    return jwt.sign(payload, Tokenize.apiSecret, { expiresIn: duration })
+    return jwt.sign(data, Tokenize.apiSecret, { expiresIn: duration })
   }
 
   public static decode = (token: string): Keys => {
