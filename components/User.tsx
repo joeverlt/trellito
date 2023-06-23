@@ -4,7 +4,7 @@ import { signOut } from 'next-auth/react'
 import { useState } from 'react'
 import { Button } from './Button'
 
-interface IUser {
+interface UserProps {
   data: {
     name?: string | null
     email?: string | null
@@ -12,7 +12,7 @@ interface IUser {
   }
 }
 
-export const User: React.FC<IUser> = ({ data }) => {
+export const User: React.FC<UserProps> = ({ data }) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false)
 
   const handleToggleDropdown = () => setShowDropdown(!showDropdown)

@@ -3,14 +3,14 @@ import styled from 'styled-components'
 import { IconButton } from './IconButton'
 import { FaCheckCircle, FaEdit, FaTimesCircle } from 'react-icons/fa'
 
-interface EditableParagraphProps {
+interface EditableTitleProps {
   title?: string
-  onSave: Function
+  onEdit: Function
 }
 
-export const EditableTitle: React.FC<EditableParagraphProps> = ({
+export const EditableTitle: React.FC<EditableTitleProps> = ({
   title,
-  onSave
+  onEdit
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [text, setText] = useState<string>(title || '')
@@ -57,7 +57,7 @@ export const EditableTitle: React.FC<EditableParagraphProps> = ({
                 event.stopPropagation()
                 event.nativeEvent.preventDefault()
                 setIsEditing(false)
-                onSave(text)
+                onEdit(text)
               }}
             />
             <IconButton

@@ -1,31 +1,20 @@
-import { configureStore } from '@reduxjs/toolkit'
-import boardsReducer from './reducers/boards.reducer'
-import listsReducer from './reducers/lists.reducer'
-import cardsReducer from './reducers/cards.reducer'
-import { persistReducer } from 'redux-persist'
-import { combineReducers } from '@reduxjs/toolkit'
-import thunk from 'redux-thunk'
-import storage from './storage'
-
-const persistConfig = {
-  key: 'root',
-  timeout: 1000,
-  storage,
-  whitelist: ['boards', 'lists', 'cards']
-}
+import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { setupListeners } from '@reduxjs/toolkit/query'
+import { services } from './services'
+import cardReducer from './reducers/card.reducer'
 
 const rootReducer = combineReducers({
-  boards: boardsReducer,
-  lists: listsReducer,
-  cards: cardsReducer
+  [services.reducerPath]: services.reducer,
+  card: cardReducer
 })
-
-const reducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-  reducer,
-  middleware: [thunk]
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(services.middleware)
 })
+
+setupListeners(store.dispatch)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

@@ -11,11 +11,11 @@ interface Route {
   route: string
 }
 
-interface INavigation {
+interface NavigationProps {
   routes: Route[]
 }
 
-export const Navigation: React.FC<INavigation> = ({ routes }) => {
+export const Navigation: React.FC<NavigationProps> = ({ routes }) => {
   const [active, setActive] = useState<string>('')
   const path: string = usePathname()
 

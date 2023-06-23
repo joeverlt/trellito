@@ -1,34 +1,39 @@
 import styled from 'styled-components'
 import { Draggable } from 'react-beautiful-dnd'
-import { useAppDispatch } from '@/store/hooks'
-import { deleteCard, selectCard } from '@/store/reducers/cards.reducer'
 import { MouseEventHandler } from 'react'
 import { IconButton } from '../IconButton'
 import { FaTimesCircle } from 'react-icons/fa'
+import { useDeleteCardMutation } from '@/store/services'
+import { Loading } from '../Loading'
 import { AnyAction, Dispatch } from '@reduxjs/toolkit'
+import { useAppDispatch } from '@/store/hooks'
+import { selectCard } from '@/store/reducers/card.reducer'
 
-interface ICard {
+interface CardProps {
   data: Card
-  index: number
   list: string
 }
 
-export const Card: React.FC<ICard> = ({ data, index }) => {
+export const Card: React.FC<CardProps> = ({ data }) => {
   const dispatch: Dispatch<AnyAction> = useAppDispatch()
   const { title, description } = data
+  const [deleteCard, { isLoading: isDeleting }] = useDeleteCardMutation()
 
-  const onDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
+  const onDeleteCard: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation()
     event.nativeEvent.preventDefault()
-    dispatch(deleteCard({ id: data.id }))
+    deleteCard(data.id as string)
   }
 
-  const onSelectCard: MouseEventHandler<HTMLDivElement> = () => {
+  const onSelectCard: MouseEventHandler<HTMLDivElement> = () =>
     dispatch(selectCard(data))
-  }
 
   return (
-    <Draggable key={data.id} draggableId={`card-${data.id}`} index={index}>
+    <Draggable
+      key={data.id}
+      draggableId={`card-${data.id}`}
+      index={data.position as number}
+    >
       {(provided) => (
         <CardWrapper
           ref={provided.innerRef}
@@ -44,8 +49,9 @@ export const Card: React.FC<ICard> = ({ data, index }) => {
             severity="danger"
             size={18}
             icon={FaTimesCircle}
-            onClick={onDelete}
+            onClick={onDeleteCard}
           />
+          {isDeleting && <Loading />}
         </CardWrapper>
       )}
     </Draggable>
@@ -59,13 +65,15 @@ const CardWrapper = styled.div`
   padding: 12px;
   background-color: rgba(50, 50, 60, 0.5);
   width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
 `
 
 const Info = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: pointer;
   line-height: 12px;
   gap: 10px;
 `

@@ -5,6 +5,7 @@ import { Button } from './Button'
 import { FaTimesCircle } from 'react-icons/fa'
 import { IconButton } from './IconButton'
 import styled, { css } from 'styled-components'
+import { Loading } from './Loading'
 
 interface IAddCardData {
   title: string
@@ -13,15 +14,19 @@ interface IAddCardData {
 interface IAddCard {
   block?: boolean
   title?: string
-  onSave: Function
+  loading?: boolean
+  onAdd: Function
 }
 
-export const AddCard: React.FC<IAddCard> = ({ block, title, onSave }) => {
+export const AddCard: React.FC<IAddCard> = ({
+  block,
+  title,
+  onAdd,
+  loading
+}) => {
   const [adding, setAdding] = useState<boolean>(false)
   const form: UseFormReturn<IAddCardData> = useForm()
   const { handleSubmit, setValue } = form
-
-  const onAdd: MouseEventHandler<HTMLFormElement> = () => setAdding(true)
 
   const onCancel: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.stopPropagation()
@@ -30,7 +35,7 @@ export const AddCard: React.FC<IAddCard> = ({ block, title, onSave }) => {
   }
 
   const onSubmit: SubmitHandler<IAddCardData> = (data) => {
-    onSave(data)
+    onAdd(data)
     setValue('title', '')
   }
 
@@ -39,7 +44,7 @@ export const AddCard: React.FC<IAddCard> = ({ block, title, onSave }) => {
       block={block ? 'true' : undefined}
       adding={adding ? 'true' : undefined}
       onSubmit={handleSubmit(onSubmit)}
-      onClick={onAdd}
+      onClick={() => setAdding(true)}
     >
       {!adding && <span>{title}</span>}
       {adding && (
@@ -61,6 +66,7 @@ export const AddCard: React.FC<IAddCard> = ({ block, title, onSave }) => {
           </Footer>
         </>
       )}
+      {loading && <Loading />}
     </AddCardWrapper>
   )
 }
@@ -77,6 +83,8 @@ const AddCardWrapper = styled.form<{ block?: string; adding?: string }>`
   gap: 12px;
   width: 100%;
   flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
 
   ${({ block }) =>
     block &&

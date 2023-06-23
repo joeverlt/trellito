@@ -9,11 +9,11 @@ interface Route {
   route: string
 }
 
-interface IHeader {
+interface HeaderProps {
   routes: Route[]
 }
 
-export const Header: React.FC<IHeader> = ({ routes }) => {
+export const Header: React.FC<HeaderProps> = ({ routes }) => {
   const { data } = useSession()
 
   return (

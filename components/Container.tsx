@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-interface IContainer {
+interface ContainerProps {
   children: React.ReactNode
 }
 
-export const Container: React.FC<IContainer> = ({ children }) => {
+export const Container: React.FC<ContainerProps> = ({ children }) => {
   return (
     <ContainerWrapper>
       <ContainerContent>{children}</ContainerContent>

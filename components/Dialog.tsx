@@ -2,13 +2,13 @@ import React, { MouseEventHandler } from 'react'
 import styled from 'styled-components'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 
-interface IDialog {
+interface DialogProps {
   show: boolean
   children: React.ReactNode
   onClose: MouseEventHandler<HTMLButtonElement | HTMLDivElement>
 }
 
-export const Dialog: React.FC<IDialog> = ({ show, onClose, children }) => {
+export const Dialog: React.FC<DialogProps> = ({ show, onClose, children }) => {
   return (
     <DialogOverlay show={show ? 'true' : undefined} onClick={onClose}>
       <DialogContent

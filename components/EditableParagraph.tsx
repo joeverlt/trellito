@@ -10,12 +10,12 @@ import { FaCheckCircle, FaEdit, FaTimesCircle } from 'react-icons/fa'
 
 interface EditableParagraphProps {
   paragraph?: string
-  onSave: Function
+  onEdit: Function
 }
 
 export const EditableParagraph: React.FC<EditableParagraphProps> = ({
   paragraph,
-  onSave
+  onEdit
 }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const [text, setText] = useState<string>(paragraph || '')
@@ -49,7 +49,7 @@ export const EditableParagraph: React.FC<EditableParagraphProps> = ({
               severity="success"
               onClick={() => {
                 setIsEditing(false)
-                onSave(text)
+                onEdit(text)
               }}
             />
             <IconButton

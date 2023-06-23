@@ -1,17 +1,18 @@
-import jwt from 'jsonwebtoken'
+import jwt, { Secret } from 'jsonwebtoken'
 
-type Keys = { [x: string]: any }
-
-const apiSecret: string = process.env.API_SECRET as string
+interface Keys {
+  [x: string]: any
+}
 
 export default class Tokenize {
+  private static apiSecret: Secret = process.env.API_SECRET as Secret
+
   public static encode = (data: Keys, duration: string): string => {
-    let payload = JSON.stringify(data)
-    payload = JSON.parse(payload)
-    return jwt.sign(payload, apiSecret, { expiresIn: duration })
+    const payload: string = JSON.stringify(data)
+    return jwt.sign(payload, Tokenize.apiSecret, { expiresIn: duration })
   }
 
   public static decode = (token: string): Keys => {
-    return jwt.verify(token, apiSecret) as Keys
+    return jwt.verify(token, Tokenize.apiSecret) as Keys
   }
 }

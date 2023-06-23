@@ -1,6 +1,6 @@
 import { SignInForm } from '@/components/signin/SignInForm'
 import { Container } from '@/components/Container'
-import { Page } from '@/layouts/Page'
+import Page from '@/layouts/Page'
 
 const SignInPage: React.FC = () => {
   return (

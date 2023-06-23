@@ -2,7 +2,7 @@ import React, { MouseEventHandler } from 'react'
 import styled from 'styled-components'
 import { IconType } from 'react-icons'
 
-interface IIconButton {
+interface IconButtonProps {
   icon: IconType
   size?: number
   severity?: string
@@ -10,7 +10,7 @@ interface IIconButton {
   onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
-export const IconButton: React.FC<IIconButton> = ({
+export const IconButton: React.FC<IconButtonProps> = ({
   icon: Icon,
   size = 24,
   severity = 'muted',
