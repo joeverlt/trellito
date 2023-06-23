@@ -5,12 +5,12 @@ import { CardEndpoints } from './endpoints/cards'
 
 type ServiceTagTypes = 'Boards' | 'Lists' | 'Cards' | 'Board'
 
-const baseUrl = process.env.API_URL
+const apiUrl = process.env.API_URL
 
 export const services = createApi({
   reducerPath: 'services',
   tagTypes: ['Boards', 'Lists', 'Cards', 'Board'] as ServiceTagTypes[],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: apiUrl }),
   endpoints: (builder) => ({
     ...BoardEndpoints(builder),
     ...ListEndpoints(builder),
